@@ -46,6 +46,8 @@ if(!$_SESSION['ADMIN']) {
 				// save!
 				if(!file_exists($config['file_base'].'/'.$_POST['file'])) {
 					$_SESSION['message'] = "That file doesn't exist.";
+					header("Location: admin.php?p=file&id=".$id);
+					exit;
 				} else {
 					if($id=='new') {
 						$id = query("INSERT INTO files (file, active) VALUES (%s, %d)", array($_POST['file'], $_POST['active'] == 1 ? 1 : 0), QUERY_ID);
@@ -53,7 +55,7 @@ if(!$_SESSION['ADMIN']) {
 						query("UPDATE files SET file=%s, active=%d WHERE id = %d", array($_POST['file'], $_POST['active'] == 1 ? 1 : 0, $id), QUERY_NONE);
 					}
 				}
-				header("Location: admin.php?p=file&id=".$id);
+				header("Location: admin.php");
 				exit;
 			}
 			if($id == 'new') {
@@ -124,7 +126,7 @@ if(!$_SESSION['ADMIN']) {
 		case 'token':
 			if(isset($_POST['submit'])) {
 				$token = $_GET['token'];
-				query("UPDATE tokens SET uses_remaining = %d, expires = %s WHERE token = %s", array($_POST['uses_remaining'], $_POST['expries'], $token), QUERY_NONE);
+				query("UPDATE tokens SET uses_remaining = %d, expires = %s WHERE token = %s", array($_POST['uses_remaining'], $_POST['expires'], $token), QUERY_NONE);
 				header("Location: admin.php?p=token&token=".$token);
 				exit;
 			}
