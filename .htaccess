@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	
+	RewriteRule ^(.*/)?files/ - [F,L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ down.php?token=$1 [L,QSA]
+</IfModule>
