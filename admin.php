@@ -13,6 +13,9 @@ ob_start();
 </head>
 <body>
 	<h1>Downloads</h1>
+    <a href="admin.php">Index</a>
+    |
+    <a href="admin.php?p=log">Log</a>
 <?php
 if($_SESSION['message']) {
 	print '<p id="message">'.$_SESSION['message'].'</p>';
@@ -143,6 +146,25 @@ if(!$_SESSION['ADMIN']) {
 <?php
 			break;
 		case 'log':
+            $entries = query("SELECT log.*, files.file FROM log LEFT JOIN files ON (files.id = log.fileid) ORDER BY id ASC");
+?>
+    <h2>Log</h2>
+    <table>
+        <tr><th>file</th><th>token</th><th>time</th><th>ip address</th></tr>
+<?php
+            foreach($entries as $entry) {
+?>
+        <tr>
+            <td><a href="admin.php?p=file&id=<?=$entry['fileid']?>"><?=$entry['file']?></a></td>
+            <td><?=$entry['token']?></td>
+            <td><?=$entry['time_used']?></td>
+            <td><?=long2ip($entry['ip_address'])?></td>
+        </tr>
+<?php
+            }
+?>
+    </table>
+<?php
 			break;
 		case 'index':
 		default:

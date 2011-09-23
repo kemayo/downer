@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 
 CREATE TABLE IF NOT EXISTS `log` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
+      `fileid` int(11) NOT NULL,
       `token` char(6) NOT NULL,
       `time_used` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       `ip_address` int(11) NOT NULL,
