@@ -7,7 +7,7 @@ if(!(isset($_GET['token']) and $_GET['token'])) {
 }
 $token = $_GET['token'];
 
-$file_info = query("SELECT f.id, f.file, f.active, (t.expires <= NOW()) as expired FROM files f LEFT JOIN tokens t ON (f.id = t.file) WHERE t.token = %s", $token, QUERY_INIT);
+$file_info = query("SELECT f.id, f.file, f.active, t.uses_remaining, (t.expires <= NOW()) as expired FROM files f LEFT JOIN tokens t ON (f.id = t.file) WHERE t.token = %s", $token, QUERY_INIT);
 $file = $config['file_base'].'/'.$file_info['file'];
 
 //print_r($file_info);die();
