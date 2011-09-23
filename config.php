@@ -10,6 +10,8 @@ $config = array(
 
 	'admin_name' => 'admin',
 	'admin_pass' => 'admin',
+
+    'xsendfile' => true,
 );
 
 ?>

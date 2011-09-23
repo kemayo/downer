@@ -7,3 +7,6 @@
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ down.php?token=$1 [L,QSA]
 </IfModule>
+<IfModule mod_xsendfile.c>
+    XSendFile On
+</IfModule>
