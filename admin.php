@@ -17,7 +17,7 @@ ob_start();
     |
     <a href="admin.php?p=log">Log</a>
 <?php
-if($_SESSION['message']) {
+if(isset($_SESSION['message']) && $_SESSION['message'])  {
 	print '<p id="message">'.$_SESSION['message'].'</p>';
 	unset($_SESSION['message']);
 }
@@ -42,7 +42,8 @@ if(!$_SESSION['ADMIN']) {
 	</form>
 <?php
 } else {
-	switch($_GET['p']) {
+    $page = isset($_GET['p']) ? $_GET['p'] : '';
+	switch($page) {
 		case 'file':
 			$id = $_GET['id'];
 			if(isset($_POST['submit'])) {
